@@ -32,10 +32,6 @@ function VehicleModelForm(){
             },
         };
         const response = await fetch(url, fetchConfig);
-        console.log("this is the response: " + response);
-        console.log("This is the form data name: " + formData.name);
-        console.log("This is the form data name: " + formData.picture_url);
-        console.log("This is the form data name: " + formData.manufacturer_id);
         if (response.ok){
             setFormData({
                 name: '',
@@ -52,7 +48,6 @@ function VehicleModelForm(){
             ...formData,
             [inputName]: value
         });
-        console.log("The formData is: " + formData.manufacturer_id);
     }
 
     return (

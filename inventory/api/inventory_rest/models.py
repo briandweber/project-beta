@@ -41,6 +41,13 @@ class Automobile(models.Model):
         on_delete=models.CASCADE,
     )
 
+    manufacturer = models.ForeignKey(
+        Manufacturer,
+        related_name="automobiles",
+        on_delete=models.CASCADE,
+        null=True,
+    )
+
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"vin": self.vin})
 
