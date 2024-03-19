@@ -26,6 +26,26 @@ class SalespersonDetailEncoder(ModelEncoder):
     ]
 
 
+class CustomerListEncoder(ModelEncoder):
+    model = Customer
+    properties = [
+        "first_name",
+        "last_name",
+        "address",
+        "phone_number",
+    ]
+
+
+class CustomerDetailEncoder(ModelEncoder):
+    model = Customer
+    properties = [
+        "first_name",
+        "last_name",
+        "address",
+        "phone_number",
+    ]
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_salespeople(request):
     if request.method == "GET":
@@ -52,3 +72,22 @@ def api_delete_salesperson(request, pk):
         return JsonResponse({"deleted": count > 0})
     except Salesperson.ObjectDoesNotExist:
         return JsonResponse({"message": "Does not exist"})
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_customers(request):
+    if request.method == "GET":
+        customers = Customer.objects.all()
+        return JsonResponse(
+            {"customers": customers},
+            encoder=CustomerListEncoder,
+            safe=False,
+        )
+    else:
+        content = json.loads(request.body)
+        customer = Customer.objects.create(**content)
+        return JsonResponse(
+            customer,
+            encoder=CustomerDetailEncoder,
+            safe=False,
+        )
