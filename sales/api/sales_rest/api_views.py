@@ -91,3 +91,12 @@ def api_list_customers(request):
             encoder=CustomerDetailEncoder,
             safe=False,
         )
+
+
+@require_http_methods(["DELETE"])
+def api_delete_customer(request, pk):
+    try:
+        count, _ = Customer.objects.filter(id=pk).delete()
+        return JsonResponse({"delete": count > 0})
+    except Customer.ObjectDoesNotExist:
+        return JsonResponse({"message": "Does not exist"})
