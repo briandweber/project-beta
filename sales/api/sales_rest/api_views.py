@@ -43,3 +43,12 @@ def api_list_salespeople(request):
             encoder=SalespersonDetailEncoder,
             safe=False,
         )
+
+
+@require_http_methods(["DELETE"])
+def api_delete_salesperson(request, pk):
+    try:
+        count, _ = Salesperson.objects.filter(id=pk).delete()
+        return JsonResponse({"deleted": count > 0})
+    except Salesperson.ObjectDoesNotExist:
+        return JsonResponse({"message": "Does not exist"})
