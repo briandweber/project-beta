@@ -7,14 +7,14 @@ function AutomobileForm(){
         color: '',
         year: '',
         vin: '',
-        model: '',
+        model_id: '',
     })
 
     const fetchData = async () => {
         const url = 'http://localhost:8100/api/models/';
         const response = await fetch(url);
         if (response.ok){
-            const data = response.json();
+            const data = await response.json();
             setModels(data.models);
         }
     }
@@ -24,7 +24,7 @@ function AutomobileForm(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const url = 'http://localhost:8100/api/automobiles';
+        const url = 'http://localhost:8100/api/automobiles/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(formData),
@@ -38,7 +38,7 @@ function AutomobileForm(){
                 color: '',
                 year: '',
                 vin: '',
-                model: '',
+                model_id: '',
             });
         }
     }
@@ -74,16 +74,16 @@ function AutomobileForm(){
                     <label htmlFor="picture_url">VIN...</label>
                     </div>
 
-                    {/* <div className="mb-3">
-                    <select onChange={handleFormChange} value={formData.model} name="model" id="model" className="form-select">
+                    <div className="mb-3">
+                    <select onChange={handleFormChange} value={formData.model_id} name="model_id" id="model_id" className="form-select">
                         <option value="">Choose a model...</option>
                         {models.map(model => {
                         return (
-                            <option key={model.href} value={model.id}>{model.name}</option>
+                            <option key={model.href} value={model.model_id}>{model.name}</option>
                         )
                         })}
                     </select>
-                    </div> */}
+                    </div>
                     <button className="btn btn-primary">Create</button>
                 </form>
                 </div>
