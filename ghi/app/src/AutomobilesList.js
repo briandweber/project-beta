@@ -8,8 +8,10 @@ function AutomobilesList(){
         if (response.ok){
             const data = await response.json();
             setAutos(data.autos);
-            console.log("The autos are: " + data.autos);
+            // console.log("The autos are: " + data.autos[0]);
+            console.log(data.autos);
         }
+
     }
     useEffect(() => {
         fetchData();
@@ -39,8 +41,8 @@ function AutomobilesList(){
                                 <td>{ auto.color }</td>
                                 <td>{ auto.year }</td>
                                 <td>{ auto.model.name }</td>
-                                {/* <td>{ auto.sold }</td> */}
-                                {/* <td>{ auto.manufacturer.name }</td> */}
+                                <td>{ auto.model.manufacturer.name }</td>
+                                <td>{ auto.sold }</td>
                             </tr>
                         )
                     })}
