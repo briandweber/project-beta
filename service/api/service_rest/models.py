@@ -14,13 +14,14 @@ class Technician(models.Model):
 class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17)
     sold = models.BooleanField(default=False)
+    href = models.CharField(max_length=200, unique=True, null=True)
 
     def get_api_url(self):
         return reverse("api_automobileVO", kwargs={"vin": self.vin})
 
 
 class Appointment(models.Model):
-    date_time = models.DateTimeField()
+    date_time = models.DateTimeField(auto_now_add=True)
     reason = models.TextField()
     status = models.CharField(max_length=100, default='created')
     vin = models.CharField(max_length=17)
