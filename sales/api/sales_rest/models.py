@@ -30,7 +30,7 @@ class Customer(models.Model):
 
 
 class AutomobileVO(models.Model):
-    vin = models.CharField(max_length=17, unique=True)
+    vin = models.CharField(max_length=200, unique=True)
     sold = models.BooleanField(default=False)
 
     def __str__(self):
@@ -58,8 +58,8 @@ class Sale(models.Model):
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
-        return self.price
+    # def __str__(self):
+    #     return self.price
 
     def get_api_url(self):
         return reverse("api_sale", kwargs={"pk": self.pk})
