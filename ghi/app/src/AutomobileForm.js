@@ -13,6 +13,7 @@ function AutomobileForm(){
     const fetchData = async () => {
         const url = 'http://localhost:8100/api/models/';
         const response = await fetch(url);
+        // console.log(response);
         if (response.ok){
             const data = await response.json();
             setModels(data.models);
@@ -33,6 +34,8 @@ function AutomobileForm(){
             },
         }
         const response = await fetch(url, fetchConfig);
+        console.log(formData);
+
         if (response.ok){
             setFormData({
                 color: '',
@@ -40,6 +43,8 @@ function AutomobileForm(){
                 vin: '',
                 model_id: '',
             });
+        }else {
+            console.log("error");
         }
     }
 
@@ -79,7 +84,7 @@ function AutomobileForm(){
                         <option value="">Choose a model...</option>
                         {models.map(model => {
                         return (
-                            <option key={model.href} value={model.model_id}>{model.name}</option>
+                            <option key={model.href} value={model.id}>{model.name}</option>
                         )
                         })}
                     </select>
