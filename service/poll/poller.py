@@ -14,10 +14,10 @@ from service_rest.models import AutomobileVO
 # from service_rest.models import Something
 
 def get_automobile():
-    url = "http://localhost:8000/api/automobiles/"
+    url = "http://inventory-api:8000/api/automobiles/"
     response = requests.get(url)
     content = json.loads(response.content)
-    for automobile in content["automobiles"]:
+    for automobile in content["autos"]:
         AutomobileVO.objects.update_or_create(
             href=automobile["href"],
             defaults={"vin": automobile["vin"]},
@@ -36,3 +36,5 @@ def poll():
 
 if __name__ == "__main__":
     poll()
+
+

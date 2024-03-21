@@ -31,7 +31,7 @@ function VehicleModelList() {
                             {models.map(
                                 model => {
                                     return (
-                                        <tr>
+                                        <tr key={model.id}>
                                             <td>{model.name}</td>
                                             <td>{model.manufacturer["name"]}</td>
                                             <td className="w-25">

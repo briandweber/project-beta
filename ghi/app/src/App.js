@@ -4,6 +4,11 @@ import Nav from './Nav';
 import ManufacturerList from './ManufacturerList';
 import ManufacturerForm from './ManufacturerForm';
 import VehicleModelList from './VehicleModelList';
+import TechnicianList from './TechnicianList';
+import TechnicianForm from './TechnicianForm';
+import AppointmentForm from './AppointmentForm';
+import AppointmentList from './AppointmentList';
+import ServiceHistory from './ServiceHistory';
 
 
 function App() {
@@ -16,6 +21,11 @@ function App() {
           <Route path="manufacturers" element={<ManufacturerList />} />
           <Route path="manufacturers/new" element={<ManufacturerForm />} />
           <Route path="models" element={<VehicleModelList />} />
+          <Route path="technicians" element={<TechnicianList />} />
+          <Route path="technicians/new" element={<TechnicianForm />} />
+          <Route path="appointments/new" element={<AppointmentForm />} />
+          <Route path="appointments" element={<AppointmentList />} />
+          <Route path="servicehistory" element={<ServiceHistory />} />
         </Routes>
       </div>
     </BrowserRouter>
