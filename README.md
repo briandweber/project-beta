@@ -4,8 +4,8 @@ CarCar is a dealership management application designed to assist in the handling
 
 Team:
 
-- Austin Hamilton - Services microservice
-- Brian Weber - Sales microservice
+- Person 1 - Which microservice?
+- Person 2 - Which microservice?
 
 ## How to Run this App
 
