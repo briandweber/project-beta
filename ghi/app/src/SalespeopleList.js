@@ -41,7 +41,6 @@ function SalespeopleList(){
                 </table>
             </div>
         </div>
-
     )
 }
 

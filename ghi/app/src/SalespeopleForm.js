@@ -43,7 +43,7 @@ function SalespeopleForm(){
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Add a Salesperson</h1>
-                    <form onSubmit={handleSubmit} id="create-automobile-form">
+                    <form onSubmit={handleSubmit} id="create-salesperson-form">
 
                         <div className="form-floating mb-3">
                         <input onChange={handleFormChange} value={formData.first_name} placeholder="first_name" required type="text" name="first_name" id="first_name" className="form-control" />
