@@ -4,8 +4,8 @@ CarCar is a dealership management application designed to assist in the handling
 
 Team:
 
-- Person 1 - Which microservice?
-- Person 2 - Which microservice?
+- Austin Hamilton - Services microservice
+- Brian Weber - Sales microservice
 
 ## How to Run this App
 
@@ -369,168 +369,152 @@ Creating an appointment requires the date/time, reason, status, vin, customer, a
 and will produce the output:
 
 ```
-
-```
-
 {
-"message": "Appointment created successfully",
-"appointment_id": 4
+  "message": "Appointment created successfully",
+  "appointment_id": 4
 }
-
 ```
 
 Changing the status of an appointment will produce the output:
-```
 
+```
 {
-"status": "canceled"
+  "status": "canceled"
 }
-
 ```
+
 and
-```
 
+```
 {
 "status": "finished"
 }
 
 ```
 
-
 Deleting an appointment will simply return the object:
-```
 
+```
 {
 "delete": true
 }
-
 ```
-
 
 ### Sales Microservice
-The sales microservice allows a dealership to manage its sales associates, customers, and sales transactions. Each one of those entities is defined in the models.py file.  The microservice combines the abilities to track those entities along with automobile data from inventory (see value objects below).  A dealership will be able to add as many associates, customers and sales records as it would like using the respective forms and then view a running list of those entities for reference at any point.  Inventory is on a 60 second delay by way of a polling function in the microservice's poller.py file.
 
+The sales microservice allows a dealership to manage its sales associates, customers, and sales transactions. Each one of those entities is defined in the models.py file. The microservice combines the abilities to track those entities along with automobile data from inventory (see value objects below). A dealership will be able to add as many associates, customers and sales records as it would like using the respective forms and then view a running list of those entities for reference at any point. Inventory is on a 60 second delay by way of a polling function in the microservice's poller.py file.
 
-A sales microservice that can store and track the sales of the dealership's automobile sales.  It interacts with the inventory API to sync inventory information for the sales associates via a poller function.  You can add sales associates, customers, and sales transactions using their respective forms.  You can also view a list of sales, sales associates, customers, as well as an individual sales associate's sale history.
+A sales microservice that can store and track the sales of the dealership's automobile sales. It interacts with the inventory API to sync inventory information for the sales associates via a poller function. You can add sales associates, customers, and sales transactions using their respective forms. You can also view a list of sales, sales associates, customers, as well as an individual sales associate's sale history.
 
 ### Sales API Endpoints
-| Action                         | Method | URL                                         |
-| ------------------------------ | ------ | ------------------------------------------- |
-| List salespeople               | GET    | http://localhost:8100/api/salespeople/      |
-| Create a salesperson           | POST   | http://localhost:8100/api/salespeople/      |
-| Delete a specific salesperson  | DELETE | http://localhost:8100/api/salespeople/id/   |
-| List customers                 | GET    | http://localhost:8100/api/customers/        |
-| Create a customer              | POST   | http://localhost:8100/api/customers/        |
-| Delete a customer              | DELETE | http://localhost:8100/api/customers/id/     |
-| List sales                     | GET    | http://localhost:8100/api/sales/            |
-| Create a sale                  | POST   | http://localhost:8100/api/sales/            |
-| Delete a sale                  | DELETE | http://localhost:8100/api/sales/id/         |
+
+| Action                        | Method | URL                                       |
+| ----------------------------- | ------ | ----------------------------------------- |
+| List salespeople              | GET    | http://localhost:8100/api/salespeople/    |
+| Create a salesperson          | POST   | http://localhost:8100/api/salespeople/    |
+| Delete a specific salesperson | DELETE | http://localhost:8100/api/salespeople/id/ |
+| List customers                | GET    | http://localhost:8100/api/customers/      |
+| Create a customer             | POST   | http://localhost:8100/api/customers/      |
+| Delete a customer             | DELETE | http://localhost:8100/api/customers/id/   |
+| List sales                    | GET    | http://localhost:8100/api/sales/          |
+| Create a sale                 | POST   | http://localhost:8100/api/sales/          |
+| Delete a sale                 | DELETE | http://localhost:8100/api/sales/id/       |
 
 ### Salespeople
+
 Getting a list of salespeople returns an object with the name "salespeople" as a key and an array of salespeople objects as its value.
+
 ```
-
 {
-"salespeople": [
-{
-"first_name": "Brian",
-"last_name": "Weber",
-"employee_id": 1
-},
-]
+  "salespeople": [
+    {
+      "first_name": "Brian",
+      "last_name": "Weber",
+      "employee_id": 1
+    },
+  ]
 }
-
 ```
 
 You can create a salesperson with a first name, last name and employee ID with JSON as follows:
+
 ```
-
 {
-"first_name": "Weber",
-"last_name": "Brian",
-"employee_id": 4
+  "first_name": "Weber",
+  "last_name": "Brian",
+  "employee_id": 4
 }
-
 ```
 
 Deleting a salesperson simply requires passing in the id in the URL.
 
-
 ### Customers
 
 Getting a list of customers returns an object with the name "customers" as a key and an array of customer objects as its value.
+
 ```
-
 {
-"customers": [
-{
-"first_name": "Brian",
-"last_name": "Weber",
-"address": "1234",
-"phone_number": "4023045267"
-},
-]
+  "customers": [
+    {
+      "first_name": "Brian",
+      "last_name": "Weber",
+      "address": "1234",
+      "phone_number": "4023045267"
+    },
+  ]
 }
-
 ```
 
 Creating a customer simply takes a first name, last name, address, and phone number:
 
 ```
-
 {
-"first_name": "porter",
-"last_name": "elliot",
-"address": "435 N Hubbard Ave",
-"phone_number": "4023045267"
+  "first_name": "porter",
+  "last_name": "elliot",
+  "address": "435 N Hubbard Ave",
+  "phone_number": "4023045267"
 }
-
 ```
 
 Deleting a customer simply requires passing in the id in the URL.
 
-
 ### Sales
 
 Getting a list of sales returns an object with the name "sales" as a key and an array of sales objects as its value.
+
 ```
-
 {
-"sales": [
-{
-"price": 10000,
-"automobile": ,
-"salesperson": ,
-"customer": {
-"first_name": "Steve",
-"last_name": "Rogers",
-"address": "555 S 55th St",
-"phone_number": "867-530-9111"
-},
+  "sales": [
+    {
+      "price": 10000,
+      "automobile": ,
+      "salesperson": ,
+      "customer": {
+        "first_name": "Steve",
+        "last_name": "Rogers",
+        "address": "555 S 55th St",
+        "phone_number": "867-530-9111"
+      }
+    }
+  ]
 }
-]
-}
-
 ```
 
 Creating a sale takes a VIN, salesperson, customer, and price:
+
 ```
-
 {
-"vin": "1C3CC5FB2AN120174",
-"salesperson": "Thor Odinson",
-"customer": "Tony Stark",
-"price": 10000
+  "vin": "1C3CC5FB2AN120174",
+  "salesperson": "Thor Odinson",
+  "customer": "Tony Stark",
+  "price": 10000
 }
-
 ```
 
 Deleting a sale simply requires passing in the id in the URL.
 
-
 ### Value Objects
 
-The Sales microservice uses an Automobile Value Object to store data from the inventory's Automobile object.  This value object only stores the VIN and Sold Status.  Data between the inventory's automobile object and the sales microservice is synchronized every sixty seconds via the poll function in the sales microservice poller.py file.  The AutomobileVO model is also used as a foreign key to the Sales object.  This allows Sales to store specific automobile information for reference.
+The Sales microservice uses an Automobile Value Object to store data from the inventory's Automobile object. This value object only stores the VIN and Sold Status. Data between the inventory's automobile object and the sales microservice is synchronized every sixty seconds via the poll function in the sales microservice poller.py file. The AutomobileVO model is also used as a foreign key to the Sales object. This allows Sales to store specific automobile information for reference.
 
-The Services microservice also uses an Automobile Value Object to store data from the inventory's Automobile object.  This value object only stores the VIN and Sold Status.  Data between the inventory's automobile object and the services microservice is synchronized every sixty seconds via the poll function in the services microservice poller.py file.  The AutomobileVO is used to get the VIN number for use in making an appointment so the technician can see which automobile will be serviced.
-```
+The Services microservice also uses an Automobile Value Object to store data from the inventory's Automobile object. This value object only stores the VIN and Sold Status. Data between the inventory's automobile object and the services microservice is synchronized every sixty seconds via the poll function in the services microservice poller.py file. The AutomobileVO is used to get the VIN number for use in making an appointment so the technician can see which automobile will be serviced.
