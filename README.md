@@ -12,10 +12,11 @@ Team:
 This application uses multiple microservices. Docker was used in the development environment. Python and the framework Django version 4.0.3 is used on the backend.
 
 Install Docker with the terminal command:
+
 MacOS - brew install --cask docker
 Windows - winget install Docker.DockerDesktop
 
-Docker Desktop can be found [here] (https://www.docker.com/products/docker-desktop/)
+Docker Desktop can be found [here](https://www.docker.com/products/docker-desktop/)
 
 Install Git
 Windows - winget install Git.Git
@@ -43,7 +44,7 @@ Your browser should display a page like this:
 
 ## Diagram
 
-Domain Driven Design was used to create the application. The application consists of three microservices. Their contexts, relationships, and data flows are diagramed in the following image:
+Domain Driven Design was used to design the application. The application consists of three microservices. Their contexts, relationships, and data flows are diagramed in the following image:
 ![Img](/images/DDDDiagram.png)
 
 ## API Documentation
@@ -285,7 +286,7 @@ The services microservice enables a dealership to schedule appointments for cust
 
 A user can also view a list of all technicians employed by the dealership as well as add any number of technicians using a technician form as well.
 
-### Service API Endpoints
+### Services API Endpoints
 
 | Action                       | Method | URL                                                |
 | ---------------------------- | ------ | -------------------------------------------------- |
@@ -338,16 +339,16 @@ Getting a list of appointments returns an object with the name "appointments" as
 
 ```
 {
-	"appointments": [
+  "appointments": [
 		{
 			"id": 2,
-            "date_time": "2024-02-01T12:30:00Z",
-            "reason": "Routine inspection",
-            "status": "Scheduled",
-            "vin": "15214",
-            "customer": "Ronald McDonald",
-            "technician_id": 1,
-            "vip": false
+      "date_time": "2024-02-01T12:30:00Z",
+      "reason": "Routine inspection",
+      "status": "Scheduled",
+      "vin": "15214",
+      "customer": "Ronald McDonald",
+      "technician_id": 1,
+      "vip": false
 		}
 	]
 }
@@ -387,7 +388,7 @@ and
 
 ```
 {
-"status": "finished"
+  "status": "finished"
 }
 
 ```
@@ -396,7 +397,7 @@ Deleting an appointment will simply return the object:
 
 ```
 {
-"delete": true
+  "delete": true
 }
 ```
 
@@ -446,7 +447,13 @@ You can create a salesperson with a first name, last name and employee ID with J
 }
 ```
 
-Deleting a salesperson simply requires passing in the id in the URL.
+Deleting a salesperson will simply return the object:
+
+```
+{
+  "delete": true
+}
+```
 
 ### Customers
 
@@ -476,7 +483,13 @@ Creating a customer simply takes a first name, last name, address, and phone num
 }
 ```
 
-Deleting a customer simply requires passing in the id in the URL.
+Deleting a customer will simply return the object:
+
+```
+{
+  "delete": true
+}
+```
 
 ### Sales
 
@@ -511,7 +524,13 @@ Creating a sale takes a VIN, salesperson, customer, and price:
 }
 ```
 
-Deleting a sale simply requires passing in the id in the URL.
+Deleting a sale will simply return the object:
+
+```
+{
+  "delete": true
+}
+```
 
 ### Value Objects
 

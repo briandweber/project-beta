@@ -7,7 +7,7 @@ import CustomersList from './CustomersList.js';
 import CustomerForm from './CustomerForm.js';
 import SalesList from './SalesList.js';
 import SaleForm from './SaleForm.js';
-import SalesHistory from './SalesHistory.js';
+import SalespersonHistory from './SalespersonHistory.js';
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
           <Route path="sales">
             <Route path="" element={<SalesList />} />
             <Route path="new" element={<SaleForm />} />
-            <Route path="history" element={<SalesHistory />} />
+            <Route path="history" element={<SalespersonHistory />} />
           </Route>
         </Routes>
       </div>
