@@ -98,6 +98,8 @@ def api_list_sales(request):
             vin = content["automobile"]
             automobile = AutomobileVO.objects.get(pk=vin)
             content["automobile"] = automobile
+            content.automobile.sale = True
+
             # automobile = AutomobileVO.objects.get(id=content["automobile"])
             # content["automobile"] = automobile
 
