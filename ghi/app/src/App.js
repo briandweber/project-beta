@@ -16,13 +16,7 @@ import TechnicianForm from './TechnicianForm';
 import AppointmentForm from './AppointmentForm';
 import AppointmentList from './AppointmentList';
 import ServiceHistory from './ServiceHistory';
-import SalespeopleList from './SalespeopleList.js';
-import SalespeopleForm from './SalespeopleForm.js';
-import CustomersList from './CustomersList.js';
-import CustomerForm from './CustomerForm.js';
-import SalesList from './SalesList.js';
-import SaleForm from './SaleForm.js';
-import SalespersonHistory from './SalespersonHistory.js';
+
 
 
 function App() {
