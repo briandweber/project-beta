@@ -27,7 +27,7 @@ function AppointmentForm () {
     useEffect(() => {
         fetchData();
     }, []);
-
+    
     const checkVIPStatus = async () => {
         const inventoryUrl = 'http://localhost:8100/api/automobiles/';
         try {
@@ -37,41 +37,20 @@ function AppointmentForm () {
             }
             const responseData = await response.json();
             const inventoryData = responseData.autos;
-            console.log(inventoryData)
+            console.log('Inventory Data:', inventoryData);
             if (!Array.isArray(inventoryData)) {
                 throw new Error('Unexpected automobile data format');
             }
-            const found = inventoryData.some(autos => autos.vin === formData.vin);
+            const formVIN = formData.vin.trim();
+            const found = inventoryData.some(autos => autos.vin === formVIN);
+            console.log('Form VIN:', formVIN);
+            console.log('VIP Status:', found);
             setIsVIP(found);
         } catch (error) {
             console.error('Error fetching or processing automobile data:', error);
-            setIsVIP(false); // Set isVIP to false in case of error
+            setIsVIP(false); 
         }
     };
-    
-    // const checkVIPStatus = async () => {
-    //     const inventoryUrl = 'http://localhost:8100/api/automobiles/';
-    //     try {
-    //         const response = await fetch(inventoryUrl);
-    //         if (!response.ok) {
-    //             throw new Error('Failed to fetch automobile data');
-    //         }
-    //         const responseData = await response.json();
-    //         const inventoryData = responseData.autos;
-    //         console.log('Inventory Data:', inventoryData);
-    //         if (!Array.isArray(inventoryData)) {
-    //             throw new Error('Unexpected automobile data format');
-    //         }
-    //         const formVIN = formData.vin.trim(); // Trim leading/trailing white spaces
-    //         const found = inventoryData.some(auto => auto.vin === formVIN);
-    //         console.log('Form VIN:', formVIN);
-    //         console.log('VIP Status:', found);
-    //         setIsVIP(found);
-    //     } catch (error) {
-    //         console.error('Error fetching or processing automobile data:', error);
-    //         setIsVIP(false); // Set isVIP to false in case of error
-    //     }
-    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();

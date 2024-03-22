@@ -40,7 +40,7 @@ function ServiceHistory () {
         <div>
             <h1>Service History</h1>
             <div className="input-group">
-                <input type="search" className="form-control rounded" aria-label="Search" aria-describedby="search-addon" value={searchVin} onChange={handleSearchChange} placeholder="Enter VIN" />
+                <input type="search" className="form-control rounded" aria-label="Search" aria-describedby="search-addon" value={searchVin} onChange={handleSearchChange} placeholder="Enter VIN..." />
                 <button type="button" className="btn btn-outline-primary" onClick={handleSearch} data-mdb-ripple-init>Search</button>
             </div>
             <table className="table table-striped">
