@@ -21,7 +21,7 @@ Docker Desktop can be found [here](https://www.docker.com/products/docker-deskto
 Install Git
 Windows - winget install Git.Git
 MacOS - install via homebrew:
-go to [homebrew](https://brew.sh/) and follow the instructions to install. Then run "brew install git" in your terminal application.
+Go to [homebrew](https://brew.sh/) and follow the instructions to install. Then run "brew install git" in your terminal application.
 
 Install Python [here](https://www.python.org/downloads/)
 
