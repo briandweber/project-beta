@@ -9,7 +9,7 @@ Team:
 
 ## How to Run this App
 
-This application uses multiple microservices. Docker was used in the development environment. Python and the framework Django version 4.0.3 is used on the backend.
+This application uses multiple microservices. Docker was used in the development environment for containerization of the services, pollers, React, and database. Python and the framework Django version 4.0.3 is used on the backend. React was used for the frontend.
 
 Install Docker with the terminal command:
 
