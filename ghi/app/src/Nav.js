@@ -12,6 +12,8 @@ function Nav() {
         <NavLink className="navbar-brand" to="/customers/new">Add a Customer</NavLink>
         <NavLink className="navbar-brand" to="/sales">Sales</NavLink>
         <NavLink className="navbar-brand" to="/sales/new">Add a Sale</NavLink>
+        <NavLink className="navbar-brand" to="/automobiles">Automobiles</NavLink>
+        <NavLink className="navbar-brand" to="/automobiles/new">Add an Automobile</NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -25,6 +27,9 @@ function Nav() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/models">Vehicle Models</NavLink>
+            </li>
+            <li>
+              <NavLink className="nav-link" to="/models/new">Add a Model</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/technicians">Technicians</NavLink>

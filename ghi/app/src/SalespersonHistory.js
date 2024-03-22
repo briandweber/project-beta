@@ -6,27 +6,16 @@ function SalespersonHistory(){
     const [formData, setFormData] = useState({
         first_name: '',
     })
-    let sum = 0;
     const fetchSales = async() => {
+        console.log(formData);
         const salesUrl = 'http://localhost:8090/api/sales/';
         const response = await fetch(salesUrl);
         if (response.ok){
             const data = await response.json();
             // const filteredSales = data.sales.filter((sale) => sale.salesperson.first_name === formData.first_name)
             const filteredSales = data.sales.filter((sale) => sale.salesperson.first_name === formData.first_name)
-            sum ++;
-
             // setSales(data.sales);
             setSales(filteredSales);
-
-
-            console.log("data.sales: ");
-            console.log(data.sales);
-            console.log("filtered sales");
-            console.log(filteredSales);
-            console.log("sales");
-            console.log(sales);
-            console.log(sum);
         }
     }
 
@@ -43,6 +32,10 @@ function SalespersonHistory(){
         // fetchSales();
     }, [])
 
+    useEffect(() => {
+        fetchSales();
+    }, [formData.first_name])
+
     const handleFormChange = async (e) => {
         const value = e.target.value;
         const inputName = e.target.name;
@@ -52,7 +45,6 @@ function SalespersonHistory(){
             ...formData,
             [inputName]: value
         });
-        fetchSales();
     }
 
     return (
