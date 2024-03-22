@@ -7,7 +7,7 @@ from django.http import JsonResponse
 import json
 
 from .encoders import (
-    AutomobileVOEncoder,
+    AutomobileVO,
     SalespeopleListEncoder,
     SalespersonDetailEncoder,
     CustomerListEncoder,
