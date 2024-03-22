@@ -93,13 +93,18 @@ def api_list_salespeople(request):
             safe=False,
         )
     else:
-        content = json.loads(request.body)
-        person = Salesperson.objects.create(**content)
-        return JsonResponse(
-            person,
-            encoder=SalespersonDetailEncoder,
-            safe=False,
-        )
+        try:
+            content = json.loads(request.body)
+            person = Salesperson.objects.create(**content)
+            return JsonResponse(
+                person,
+                encoder=SalespersonDetailEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse({"message": "Could not create the salesperson"})
+            response.status_code = 400
+            return response
 
 
 @require_http_methods(["DELETE"])
@@ -121,13 +126,18 @@ def api_list_customers(request):
             safe=False,
         )
     else:
-        content = json.loads(request.body)
-        customer = Customer.objects.create(**content)
-        return JsonResponse(
-            customer,
-            encoder=CustomerDetailEncoder,
-            safe=False,
-        )
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.create(**content)
+            return JsonResponse(
+                customer,
+                encoder=CustomerDetailEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse({"message": "Could not create the customer"})
+            response.status_code = 400
+            return response
 
 
 @require_http_methods(["DELETE"])
@@ -149,25 +159,30 @@ def api_list_sales(request):
             safe=False,
         )
     else:
-        content = json.loads(request.body)
-        vin = content["automobile"]
-        automobile = AutomobileVO.objects.get(pk=vin)
-        content["automobile"] = automobile
-        # automobile = AutomobileVO.objects.get(id=content["automobile"])
-        # content["automobile"] = automobile
+        try:
+            content = json.loads(request.body)
+            vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(pk=vin)
+            content["automobile"] = automobile
+            # automobile = AutomobileVO.objects.get(id=content["automobile"])
+            # content["automobile"] = automobile
 
-        salesperson = Salesperson.objects.get(id=content["salesperson"])
-        content["salesperson"] = salesperson
+            salesperson = Salesperson.objects.get(id=content["salesperson"])
+            content["salesperson"] = salesperson
 
-        customer = Customer.objects.get(id=content["customer"])
-        content["customer"] = customer
+            customer = Customer.objects.get(id=content["customer"])
+            content["customer"] = customer
 
-        sale = Sale.objects.create(**content)
-        return JsonResponse(
-            sale,
-            encoder=SaleDetailEncoder,
-            safe=False,
-        )
+            sale = Sale.objects.create(**content)
+            return JsonResponse(
+                sale,
+                encoder=SaleDetailEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse({"message": "Could not create the sale"})
+            response.status_code = 400
+            return response
 
 
 @require_http_methods(["DELETE"])
