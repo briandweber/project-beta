@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-success flex-wrap">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">CarCar</NavLink>
         <NavLink className="navbar-brand" to="/salespeople">Salespeople</NavLink>
@@ -25,6 +25,9 @@ function Nav() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/models">Vehicle Models</NavLink>
+            </li>
+            <li>
+              <NavLink className="nav-link" to="/models/new">Add a Model</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/technicians">Technicians</NavLink>
