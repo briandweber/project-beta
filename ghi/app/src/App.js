@@ -50,6 +50,10 @@ function App() {
           <Route path="appointments/new" element={<AppointmentForm />} />
           <Route path="appointments" element={<AppointmentList />} />
           <Route path="servicehistory" element={<ServiceHistory />} />
+        <Route path="automobiles">
+          <Route path="" element={<AutomobilesList />} />
+          <Route path="new" element={<AutomobileForm />} />
+        </Route>
         <Route path="salespeople">
             <Route path="" element={<SalespeopleList />} />
             <Route path="new" element={<SalespeopleForm />} />
