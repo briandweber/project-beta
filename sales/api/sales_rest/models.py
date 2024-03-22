@@ -30,7 +30,7 @@ class Customer(models.Model):
 
 
 class AutomobileVO(models.Model):
-    vin = models.CharField(max_length=200, primary_key=True, unique=True)
+    vin = models.CharField(max_length=200, unique=True)
     sold = models.BooleanField(default=False)
     href = models.CharField(max_length=200, unique=True, null=True)
 

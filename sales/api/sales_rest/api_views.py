@@ -93,33 +93,32 @@ def api_list_sales(request):
             safe=False,
         )
     else:
-        # try:
-        content = json.loads(request.body)
-        vin = content["automobile"]
-        print(vin)
-        automobile = AutomobileVO.objects.get(pk=vin)
-        content["automobile"] = automobile
-        content.automobile.sale = True
+        try:
+            content = json.loads(request.body)
+            vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(pk=vin)
+            content["automobile"] = automobile
+            content.automobile.sold = True
 
-        # automobile = AutomobileVO.objects.get(id=content["automobile"])
-        # content["automobile"] = automobile
+            salesperson_id = content["salesperson"]
+            salesperson = Salesperson.objects.get(pk=salesperson_id)
+            content["salesperson"] = salesperson
 
-        salesperson = Salesperson.objects.get(id=content["salesperson"])
-        content["salesperson"] = salesperson
+            customer_id = content["customer"]
+            customer = Customer.objects.get(pk=customer_id)
+            content["customer"] = customer
 
-        customer = Customer.objects.get(id=content["customer"])
-        content["customer"] = customer
+            sale = Sale.objects.create(**content)
 
-        sale = Sale.objects.create(**content)
-        return JsonResponse(
-            sale,
-            encoder=SaleDetailEncoder,
-            safe=False,
-        )
-        # except:
-        #     response = JsonResponse({"message": "Could not create the sale"})
-        #     response.status_code = 400
-        #     return response
+            return JsonResponse(
+                sale,
+                encoder=SaleDetailEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse({"message": "Could not create the sale"})
+            response.status_code = 400
+            return response
 
 
 @require_http_methods(["DELETE"])
