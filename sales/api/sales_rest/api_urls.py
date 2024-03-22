@@ -5,8 +5,8 @@ from .api_views import (
     api_delete_salesperson,
     api_list_customers,
     api_delete_customer,
-    # api_list_sales,
-    # api_delete_sale,
+    api_list_sales,
+    api_delete_sale,
 )
 
 
@@ -17,6 +17,6 @@ urlpatterns = [
     ),
     path("customers/", api_list_customers, name="api_list_customers"),
     path("customers/<int:pk>/", api_delete_customer, name="api_delete_customer"),
-    # path("sales/", api_list_sales, name="api_list_sales"),
-    # path("sales/<int:pk>/", api_delete_sale, name="api_delete_sale"),
+    path("sales/", api_list_sales, name="api_list_sales"),
+    path("sales/<int:pk>/", api_delete_sale, name="api_delete_sale"),
 ]

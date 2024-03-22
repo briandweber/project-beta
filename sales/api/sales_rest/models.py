@@ -32,12 +32,13 @@ class Customer(models.Model):
 class AutomobileVO(models.Model):
     vin = models.CharField(max_length=200, unique=True)
     sold = models.BooleanField(default=False)
+    href = models.CharField(max_length=200, unique=True, null=True)
 
     def __str__(self):
         return self.vin
 
     def get_api_url(self):
-        return reverse("api_automobile", kwargs={"pk": self.pk})
+        return reverse("api_automobile", kwargs={"vin": self.vin})
 
 
 class Sale(models.Model):

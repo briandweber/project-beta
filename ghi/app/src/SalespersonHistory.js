@@ -2,29 +2,57 @@ import React, { useEffect, useState } from 'react';
 
 function SalespersonHistory(){
     const [salespeople, setSalespeople] = useState([]);
+    const [sales, setSales] = useState([]);
     const [formData, setFormData] = useState({
         first_name: '',
     })
-    const fetchData = async () => {
-        const url = 'http://localhost:8090/api/salespeople/';
-        const response = await fetch(url);
+    let sum = 0;
+    const fetchSales = async() => {
+        const salesUrl = 'http://localhost:8090/api/sales/';
+        const response = await fetch(salesUrl);
+        if (response.ok){
+            const data = await response.json();
+            // const filteredSales = data.sales.filter((sale) => sale.salesperson.first_name === formData.first_name)
+            const filteredSales = data.sales.filter((sale) => sale.salesperson.first_name === formData.first_name)
+            sum ++;
+
+            // setSales(data.sales);
+            setSales(filteredSales);
+
+
+            console.log("data.sales: ");
+            console.log(data.sales);
+            console.log("filtered sales");
+            console.log(filteredSales);
+            console.log("sales");
+            console.log(sales);
+            console.log(sum);
+        }
+    }
+
+    const fetchSalespeople = async () => {
+        const salespeopleUrl = 'http://localhost:8090/api/salespeople/';
+        const response = await fetch(salespeopleUrl);
         if (response.ok){
             const data = await response.json();
             setSalespeople(data.salespeople);
         }
     }
     useEffect(() => {
-        fetchData();
+        fetchSalespeople();
+        // fetchSales();
     }, [])
 
     const handleFormChange = async (e) => {
         const value = e.target.value;
         const inputName = e.target.name;
+
+        // fetchSalespeople();
         setFormData({
             ...formData,
             [inputName]: value
         });
-
+        fetchSales();
     }
 
     return (
@@ -34,11 +62,11 @@ function SalespersonHistory(){
                 <h1>Salesperson History</h1>
                 <form id="create-automobile-form">
                     <div className="mb-3">
-                    <select onChange={handleFormChange} value={formData.model_id} name="model_id" id="model_id" className="form-select">
+                    <select onChange={handleFormChange} value={formData.first_name} name="first_name" id="first_name" className="form-select">
                         <option value="">Choose a salesperson...</option>
                         {salespeople.map(peep => {
                         return (
-                            <option key={peep.href} value={peep.employee_id}>{peep.first_name} {peep.last_name}</option>
+                            <option key={peep.employee_id} value={peep.first_name}>{peep.first_name} {peep.last_name} </option>
                         )
                         })}
                     </select>
@@ -57,12 +85,13 @@ function SalespersonHistory(){
                                 </tr>
                             </thead>
                             <tbody>
-                                {salespeople.map(peeps => {
+                                {sales.map(sale => {
                                     return (
-                                        <tr key={ peeps.href }>
-                                            <td>{ peeps.first_name } { peeps.last_name }</td>
-                                            <td>{ peeps.first_name }</td>
-                                            <td>{ peeps.last_name }</td>
+                                        <tr key={ sale.price }>
+                                            <td>{ sale.salesperson.first_name } { sale.salesperson.last_name }</td>
+                                            <td>{ sale.customer.first_name } { sale.customer.last_name }</td>
+                                            <td>{ sale.automobile.vin }</td>
+                                            <td>{ sale.price }</td>
                                         </tr>
                                     )
                                 })}
