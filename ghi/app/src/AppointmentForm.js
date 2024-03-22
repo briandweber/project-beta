@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 function AppointmentForm () {
     const [technicians, setTechnicians] = useState([]);
+    const [isVIP, setIsVIP] = useState(false);
 
     const initialState = {
         vin: '',
@@ -27,29 +28,75 @@ function AppointmentForm () {
         fetchData();
     }, []);
 
+    const checkVIPStatus = async () => {
+        const inventoryUrl = 'http://localhost:8100/api/automobiles/';
+        try {
+            const response = await fetch(inventoryUrl);
+            if (!response.ok) {
+                throw new Error('Failed to fetch automobile data');
+            }
+            const responseData = await response.json();
+            const inventoryData = responseData.autos;
+            console.log(inventoryData)
+            if (!Array.isArray(inventoryData)) {
+                throw new Error('Unexpected automobile data format');
+            }
+            const found = inventoryData.some(autos => autos.vin === formData.vin);
+            setIsVIP(found);
+        } catch (error) {
+            console.error('Error fetching or processing automobile data:', error);
+            setIsVIP(false); // Set isVIP to false in case of error
+        }
+    };
+    
+    // const checkVIPStatus = async () => {
+    //     const inventoryUrl = 'http://localhost:8100/api/automobiles/';
+    //     try {
+    //         const response = await fetch(inventoryUrl);
+    //         if (!response.ok) {
+    //             throw new Error('Failed to fetch automobile data');
+    //         }
+    //         const responseData = await response.json();
+    //         const inventoryData = responseData.autos;
+    //         console.log('Inventory Data:', inventoryData);
+    //         if (!Array.isArray(inventoryData)) {
+    //             throw new Error('Unexpected automobile data format');
+    //         }
+    //         const formVIN = formData.vin.trim(); // Trim leading/trailing white spaces
+    //         const found = inventoryData.some(auto => auto.vin === formVIN);
+    //         console.log('Form VIN:', formVIN);
+    //         console.log('VIP Status:', found);
+    //         setIsVIP(found);
+    //     } catch (error) {
+    //         console.error('Error fetching or processing automobile data:', error);
+    //         setIsVIP(false); // Set isVIP to false in case of error
+    //     }
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        await checkVIPStatus();
         const url = 'http://localhost:8080/api/appointments/';
         const fetchConfig = {
             method: 'POST',
-            body: JSON.stringify({
-                date_time: formData.date_time,
-                reason: formData.reason,
-                vin: formData.vin,
-                customer: formData.customer,
-                technician: formData.technician,
-            }),
+            body: JSON.stringify({...formData, "vip": isVIP}),
             headers: {
-              'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
-          }
-
-          const response = await fetch(url, fetchConfig);
-          console.log(response)
-          if (response.ok) {
-            setFormData(initialState);
-          }
-    }
+        };
+    
+        try {
+            const response = await fetch(url, fetchConfig);
+            if (response.ok) {
+                setFormData(initialState);
+            } else {
+                const errorMessage = await response.text();
+                throw new Error(`Failed to create appointment: ${response.status} - ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error('Error creating appointment:', error.message);
+        }
+    };
 
     const handleFormChange = (e) => {
         const value = e.target.value;
@@ -118,7 +165,7 @@ function AppointmentForm () {
                                 <option value="">Choose a Technician</option>
                                 {technicians.map(technician => {
                                     return (
-                                        <option key={technician.id} value={technician.href}>
+                                        <option key={technician.id} value={technician.id}>
                                             {technician.first_name}
                                         </option>
                                     )

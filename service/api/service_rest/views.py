@@ -4,6 +4,7 @@ from common.json import ModelEncoder
 import json
 from django.http import JsonResponse
 from .models import Appointment, AutomobileVO, Technician
+import requests
 
 # Create your views here.
 
@@ -102,6 +103,7 @@ def api_appointments(request, automobile_vo_id=None):
             encoder=AppointmentEncoder,
             safe=False
         )
+        
     
 @require_http_methods(["GET", "DELETE"])
 def api_show_appointment(request, pk):
