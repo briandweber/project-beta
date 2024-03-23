@@ -9,25 +9,29 @@ Team:
 
 ## How to Run this App
 
-This application uses multiple microservices. Docker was used in the development environment. Python and the framework Django version 4.0.3 is used on the backend.
+This application uses multiple microservices. Docker was used in the development environment for containerization of the services, pollers, React, and database. Python and the framework Django version 4.0.3 is used on the backend. React was used for the frontend.
 
-Install Docker with the terminal command:
+### Install Docker with the terminal command:
 
 MacOS - brew install --cask docker
+
 Windows - winget install Docker.DockerDesktop
 
 Docker Desktop can be found [here](https://www.docker.com/products/docker-desktop/)
 
-Install Git
+### Install Git
+
 Windows - winget install Git.Git
+
 MacOS - install via homebrew:
-go to [homebrew](https://brew.sh/) and follow the instructions to install. Then run "brew install git" in your terminal application.
 
-Install Python [here](https://www.python.org/downloads/)
+Go to [homebrew](https://brew.sh/) and follow the instructions to install. Then run "brew install git" in your terminal application.
 
-Install Django via pip: pip install django
+### Install Python [here](https://www.python.org/downloads/)
 
-Fork this repository
+### Install Django via pip: pip install django
+
+### Fork this repository
 
 Copy the cloned repository to your clipboard and clone it to your local machine in your desired directory:
 git clone <<your.repository.url.here>>
