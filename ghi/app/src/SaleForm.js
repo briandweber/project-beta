@@ -19,7 +19,6 @@ function SaleForm(){
             const data = await response.json();
             const filteredAutos = data.autos.filter((auto) => auto.sold === false);
             setAutomobiles(filteredAutos);
-            console.log("hey" + "hi" + automobiles);
         }
     }
 
@@ -29,7 +28,6 @@ function SaleForm(){
         if (response.ok){
             const data = await response.json();
             setSalespeople(data.salespeople);
-            console.log(salespeople);
         }
     }
 
@@ -39,7 +37,6 @@ function SaleForm(){
         if (response.ok){
             const data = await response.json();
             setCustomers(data.customers);
-            console.log(customers);
         }
     }
 
@@ -55,14 +52,14 @@ function SaleForm(){
         event.preventDefault();
         const url = 'http://localhost:8090/api/sales/';
         const fetchConfig = {
-            method: "post",
+            method: "POST",
             body: JSON.stringify(formData),
             headers: {
                 'Content-Type': 'application/json',
             },
         }
+        console.log(formData);
         const response = await fetch(url, fetchConfig);
-        console.log(response);
         if (response.ok){
             setFormData({
                 vin: '',
@@ -70,7 +67,9 @@ function SaleForm(){
                 customer: '',
                 price: '',
             });
+            console.log("response is ok")
         }
+        console.log(formData);
     }
 
     const handleFormChange = async (e) => {
@@ -106,18 +105,18 @@ function SaleForm(){
                                 <option value="">Choose a Salesperson...</option>
                                 {salespeople.map(peep => {
                                 return (
-                                    <option key={peep.first_name} value={peep.salesperson_id}>{peep.first_name} {peep.last_name}</option>
+                                    <option key={peep.first_name} value={peep.employee_id}>{peep.first_name} {peep.last_name}</option>
                                 )
                                 })}
                             </select>
                         </div>
 
                         <div className="mb-3">
-                            <select onChange={handleFormChange} value={formData.customer} name="customer" id="customer" className="form-select">
+                            <select onChange={handleFormChange} value={formData.customer_id} name="customer_id" id="customer_id" className="form-select">
                                 <option value="">Choose a Customer...</option>
                                 {customers.map(customer => {
                                 return (
-                                    <option key={customer.first_name} value={customer.id}>{customer.first_name} {customer.last_name}</option>
+                                    <option key={customer.first_name} value={customer.customer_id}>{customer.first_name} {customer.last_name}</option>
                                 )
                                 })}
                             </select>
