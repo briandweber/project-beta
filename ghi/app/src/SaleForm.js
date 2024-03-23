@@ -58,8 +58,9 @@ function SaleForm(){
                 'Content-Type': 'application/json',
             },
         }
-        console.log(formData);
         const response = await fetch(url, fetchConfig);
+        console.log("response is: ");
+        console.log(response);
         if (response.ok){
             setFormData({
                 vin: '',
