@@ -64,12 +64,19 @@ def api_technicians(request):
 @require_http_methods(["GET", "DELETE"])
 def api_show_technicians(request, pk):
     if request.method == "GET":
-        technician = Technician.objects.get(id=pk)
-        return JsonResponse(
+        try:
+            technician = Technician.objects.get(id=pk)
+            return JsonResponse(
             technician,
             encoder=TechnicianEncoder,
             safe=False
         )
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"error": "Technician does not exist"},
+                status=404,
+            )
+        
     else:
         count, _ = Technician.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
@@ -95,7 +102,7 @@ def api_appointments(request, automobile_vo_id=None):
         except Technician.DoesNotExist:
             return JsonResponse(
                 {"message": "Technician does not exist"},
-                status=400,
+                status=404,
             )
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
