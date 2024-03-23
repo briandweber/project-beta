@@ -36,6 +36,7 @@ class CustomerListEncoder(ModelEncoder):
         "last_name",
         "address",
         "phone_number",
+        "customer_id",
     ]
 
 
@@ -46,6 +47,7 @@ class CustomerDetailEncoder(ModelEncoder):
         "last_name",
         "address",
         "phone_number",
+        "customer_id",
     ]
 
 
@@ -75,4 +77,6 @@ class SaleDetailEncoder(ModelEncoder):
     ]
     encoders = {
         "automobile": AutomobileVOEncoder(),
+        "salesperson": SalespersonDetailEncoder(),
+        "customer": CustomerDetailEncoder(),
     }

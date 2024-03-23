@@ -19,13 +19,19 @@ from .encoders import (
 
 @require_http_methods(["GET", "POST"])
 def api_list_salespeople(request):
-    if request.method == "GET":
-        salespeople = Salesperson.objects.all()
-        return JsonResponse(
-            {"salespeople": salespeople},
-            encoder=SalespeopleListEncoder,
-            safe=False,
-        )
+    try:
+        if request.method == "GET":
+            salespeople = Salesperson.objects.all()
+            return JsonResponse(
+                {"salespeople": salespeople},
+                encoder=SalespeopleListEncoder,
+                safe=False,
+            )
+    except:
+        response = JsonResponse({"message": "Could not list the salespeople"})
+        response.status_code = 400
+        return response
+
     else:
         try:
             content = json.loads(request.body)
@@ -52,13 +58,19 @@ def api_delete_salesperson(request, pk):
 
 @require_http_methods(["GET", "POST"])
 def api_list_customers(request):
-    if request.method == "GET":
-        customers = Customer.objects.all()
-        return JsonResponse(
-            {"customers": customers},
-            encoder=CustomerListEncoder,
-            safe=False,
-        )
+    try:
+        if request.method == "GET":
+            customers = Customer.objects.all()
+            return JsonResponse(
+                {"customers": customers},
+                encoder=CustomerListEncoder,
+                safe=False,
+            )
+    except:
+        response = JsonResponse({"message": "Could not list the customers"})
+        response.status_code = 400
+        return response
+
     else:
         try:
             content = json.loads(request.body)
@@ -85,31 +97,37 @@ def api_delete_customer(request, pk):
 
 @require_http_methods(["GET", "POST"])
 def api_list_sales(request):
-    if request.method == "GET":
-        sales = Sale.objects.all()
-        return JsonResponse(
-            {"sales": sales},
-            encoder=SalesListEncoder,
-            safe=False,
-        )
+    try:
+        if request.method == "GET":
+            sales = Sale.objects.all()
+            return JsonResponse(
+                {"sales": sales},
+                encoder=SalesListEncoder,
+                safe=False,
+            )
+    except:
+        response = JsonResponse({"message": "Could not list the sales"})
+        response.status_code = 400
+        return response
+
     else:
         try:
             content = json.loads(request.body)
             vin = content["automobile"]
-            automobile = AutomobileVO.objects.get(pk=vin)
+            automobile = AutomobileVO.objects.get(vin=vin)
             content["automobile"] = automobile
-            content.automobile.sold = True
+            automobile.sold = True
+            content["automobile"] = automobile
 
             salesperson_id = content["salesperson"]
-            salesperson = Salesperson.objects.get(pk=salesperson_id)
+            salesperson = Salesperson.objects.get(employee_id=salesperson_id)
             content["salesperson"] = salesperson
 
             customer_id = content["customer"]
-            customer = Customer.objects.get(pk=customer_id)
+            customer = Customer.objects.get(customer_id=customer_id)
             content["customer"] = customer
 
             sale = Sale.objects.create(**content)
-
             return JsonResponse(
                 sale,
                 encoder=SaleDetailEncoder,
