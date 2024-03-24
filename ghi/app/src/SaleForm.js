@@ -6,9 +6,9 @@ function SaleForm(){
     const [salespeople, setSalespeople] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [formData, setFormData] = useState({
-        vin: '',
-        salesperson_id: '',
-        customer_id: '',
+        automobile: '',
+        salesperson: '',
+        customer: '',
         price: '',
     })
 
@@ -19,6 +19,7 @@ function SaleForm(){
             const data = await response.json();
             const filteredAutos = data.autos.filter((auto) => auto.sold === false);
             setAutomobiles(filteredAutos);
+            console.log(filteredAutos);
         }
     }
 
@@ -63,7 +64,7 @@ function SaleForm(){
         console.log(response);
         if (response.ok){
             setFormData({
-                vin: '',
+                automobile: '',
                 salesperson: '',
                 customer: '',
                 price: '',
@@ -91,7 +92,7 @@ function SaleForm(){
                     <form onSubmit={handleSubmit} id="create-sales-form">
 
                         <div className="mb-3">
-                            <select onChange={handleFormChange} value={formData.vin} name="vin" id="vin" className="form-select">
+                            <select onChange={handleFormChange} value={formData.automobile} name="automobile" id="automobile" className="form-select">
                                 <option value="">Choose an Automobile VIN...</option>
                                 {automobiles.map(auto => {
                                 return (
@@ -102,18 +103,18 @@ function SaleForm(){
                         </div>
 
                         <div className="mb-3">
-                            <select onChange={handleFormChange} value={formData.salesperson_id} name="salesperson_id" id="salesperson" className="form-select">
+                            <select onChange={handleFormChange} value={formData.salesperson} name="salesperson" id="salesperson" className="form-select">
                                 <option value="">Choose a Salesperson...</option>
-                                {salespeople.map(peep => {
+                                {salespeople.map(salesperson => {
                                 return (
-                                    <option key={peep.first_name} value={peep.employee_id}>{peep.first_name} {peep.last_name}</option>
+                                    <option key={salesperson.first_name} value={salesperson.employee_id}>{salesperson.first_name} {salesperson.last_name}</option>
                                 )
                                 })}
                             </select>
                         </div>
 
                         <div className="mb-3">
-                            <select onChange={handleFormChange} value={formData.customer_id} name="customer_id" id="customer_id" className="form-select">
+                            <select onChange={handleFormChange} value={formData.customer} name="customer" id="customer" className="form-select">
                                 <option value="">Choose a Customer...</option>
                                 {customers.map(customer => {
                                 return (

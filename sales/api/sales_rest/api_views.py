@@ -117,7 +117,6 @@ def api_list_sales(request):
             automobile = AutomobileVO.objects.get(vin=vin)
             content["automobile"] = automobile
             automobile.sold = True
-            content["automobile"] = automobile
 
             salesperson_id = content["salesperson"]
             salesperson = Salesperson.objects.get(employee_id=salesperson_id)
