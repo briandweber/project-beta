@@ -8,7 +8,6 @@ function AutomobilesList(){
         if (response.ok){
             const data = await response.json();
             setAutos(data.autos);
-            console.log(data.autos);
         }
 
     }

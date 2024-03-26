@@ -117,6 +117,7 @@ def api_list_sales(request):
             automobile = AutomobileVO.objects.get(vin=vin)
             content["automobile"] = automobile
             automobile.sold = True
+
         except:
             response = JsonResponse({"message": "Could not add the automobile"})
             response.status_code = 400

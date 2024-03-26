@@ -19,7 +19,6 @@ function SaleForm(){
             const data = await response.json();
             const filteredAutos = data.autos.filter((auto) => auto.sold === false);
             setAutomobiles(filteredAutos);
-            console.log(filteredAutos);
         }
     }
 
@@ -60,8 +59,6 @@ function SaleForm(){
             },
         }
         const response = await fetch(url, fetchConfig);
-        console.log("response is: ");
-        console.log(response);
         if (response.ok){
             setFormData({
                 automobile: '',
@@ -69,9 +66,7 @@ function SaleForm(){
                 customer: '',
                 price: '',
             });
-            console.log("response is ok")
         }
-        console.log(formData);
     }
 
     const handleFormChange = async (e) => {
