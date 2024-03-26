@@ -32,22 +32,24 @@ class SalespersonDetailEncoder(ModelEncoder):
 class CustomerListEncoder(ModelEncoder):
     model = Customer
     properties = [
+        "id",
         "first_name",
         "last_name",
         "address",
         "phone_number",
-        "customer_id",
+        # "customer_id",
     ]
 
 
 class CustomerDetailEncoder(ModelEncoder):
     model = Customer
     properties = [
+        "id",
         "first_name",
         "last_name",
         "address",
         "phone_number",
-        "customer_id",
+        # "customer_id",
     ]
 
 

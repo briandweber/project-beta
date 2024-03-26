@@ -118,7 +118,7 @@ function SaleForm(){
                                 <option value="">Choose a Customer...</option>
                                 {customers.map(customer => {
                                 return (
-                                    <option key={customer.first_name} value={customer.customer_id}>{customer.first_name} {customer.last_name}</option>
+                                    <option key={customer.first_name} value={customer.id}>{customer.first_name} {customer.last_name}</option>
                                 )
                                 })}
                             </select>

@@ -21,7 +21,7 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=400)
-    customer_id = models.PositiveSmallIntegerField(null=True)
+    # customer_id = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
         return self.first_name
